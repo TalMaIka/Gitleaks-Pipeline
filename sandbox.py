@@ -36,11 +36,11 @@ def validate_docker():
 
 # Build the Docker image using the specified Dockerfile.
 def build_docker_image(verbose):
-    # #Check if the docker image already exists
-    # docker_images = subprocess.run(["docker", "images", "-q", "gitleaks-pipeline"], stdout=subprocess.PIPE)
-    # if docker_images.stdout:
-    #     print("[!] Docker image already exists!")
-    #     return
+    #Check if the docker image already exists
+    docker_images = subprocess.run(["docker", "images", "-q", "gitleaks-pipeline"], stdout=subprocess.PIPE)
+    if docker_images.stdout:
+        print("[!] Docker image already exists!")
+        return
     print("Building Docker image ...")
     sleep(1)
     command = ["docker", "build", "-t", "gitleaks-pipeline", "-f", "src/Dockerfile", "."]
