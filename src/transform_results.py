@@ -13,6 +13,7 @@ class ExitCodes(Enum):
     COMMAND_ERROR = 2
     FILE_NOT_FOUND = 3
     NO_FINDINGS = 4
+    NO_GIT_FOLDER = 5
 
 
 class ReportFile(BaseModel):
@@ -43,8 +44,7 @@ class GitleaksResults(BaseModel):
 def run_gitleaks(command_args, report_file):
     try:
         # Execute the Gitleaks command and capture the output
-        result = subprocess.run(command_args, check=True, capture_output=True, text=True)
-        print(result.stdout)  # Print the Gitleaks output
+        subprocess.run(command_args, check=True, capture_output=True, text=True)
 
     except subprocess.CalledProcessError as e:
         # Capture error message from stderr
@@ -59,9 +59,13 @@ def run_gitleaks(command_args, report_file):
 
         if any(keyword in error_message for keyword in ["unknown command", "for more information about a command."]):
             write_error_message(error_message, ExitCodes.ARGUMENT_OR_FLAG_ERROR.value, report_file)
+
+        if "could not create Git cmd" in e.stderr:
+            write_error_message("No .git folder found. Ensure you are in the root directory of the repository or add the flag '--no-git'", ExitCodes.NO_GIT_FOLDER.value, report_file)
         
-        # Optionally, print the error message for debugging
-        sys.stderr.write(e.stderr)
+        if "--verbose" in sys.argv or "-v" in sys.argv:
+            # Print the Gitleaks output to the console
+            sys.stderr.write(e.stderr)
 
 
 # Converting raw output by Gitleaks output into the shorter JSON format.
@@ -131,10 +135,6 @@ def check_args(report_file):
     if "--config" in sys.argv:
         # Append the default included config file
         sys.argv.extend(["--config", "src/gitleaks.toml"])
-
-    if "--no-git" not in sys.argv:
-        # Append the default --no-git flag
-        sys.argv.extend(["--no-git"])
 
     if "gitleaks" in sys.argv[1:]:
         # Check if the user provided the "gitleaks" command
