@@ -1,14 +1,34 @@
 {
     "findings": [
         {
-            "filename": "tests/__pycache__/test_transform_results.cpython-310-pytest-8.3.4.pyc",
-            "line_range": "9-9",
-            "description": "Identified a Slack Bot token, which may compromise bot integrations and communication channel security."
+            "filename": "tests/test-leak-file.txt",
+            "line_range": "57-57",
+            "description": "Found a Stripe Access Token, posing a risk to payment processing services and sensitive financial data."
         },
         {
-            "filename": "tests/test_transform_results.py",
-            "line_range": "44-44",
+            "filename": "tests/test-leak-file.txt",
+            "line_range": "12-14",
+            "description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption."
+        },
+        {
+            "filename": "tests/test-leak-file.txt",
+            "line_range": "27-29",
+            "description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption."
+        },
+        {
+            "filename": "tests/test-leak-file.txt",
+            "line_range": "30-32",
+            "description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption."
+        },
+        {
+            "filename": "tests/test-leak-file.txt",
+            "line_range": "60-60",
             "description": "Uncovered a GCP API key, which could lead to unauthorized access to Google Cloud services and data breaches."
-        }    
+        },
+        {
+            "filename": "tests/test-leak-file.txt",
+            "line_range": "4-4",
+            "description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations."
+        }
     ]
 }
