@@ -19,6 +19,7 @@ gitleaks-pipeline/
 │   ├── api-keys.txt        # API keys for testing (if applicable)
 │   └── test_transform_results.py # Test file for `transform_results.py`
 │
+├──  example_report.json    # Transformed report example
 ├── sandbox.py              # Main Python script to automate Docker build and run gitleaks the pipeline
 └── README.md               # Instructions on building and running the Docker image
 ```
