@@ -79,7 +79,7 @@ In case of errors (e.g., invalid Gitleaks flags or commands), the errors will be
 ```json
 {
     "exit_code": 2,
-    "error_message": "Error: unknown flag: --no-gi"
+    "error_message": "Error: unknown flag: --invalid-flag"
 }
 ```
 
