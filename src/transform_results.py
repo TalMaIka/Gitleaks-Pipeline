@@ -61,7 +61,7 @@ def run_gitleaks(command_args, report_file):
             write_error_message(error_message, ExitCodes.ARGUMENT_OR_FLAG_ERROR.value, report_file)
 
         if "could not create Git cmd" in e.stderr:
-            write_error_message("No .git folder found. Ensure you are in the root directory of the repository or add the flag '--no-git'", ExitCodes.NO_GIT_FOLDER.value, report_file)
+            write_error_message("No .git folder found. Ensure you are in the root directory of the repository or use '--no-git' flag", ExitCodes.NO_GIT_FOLDER.value, report_file)
         
         if "--verbose" in sys.argv or "-v" in sys.argv:
             # Print the Gitleaks output to the console
@@ -106,6 +106,8 @@ def write_error_message(error_message, error_code, report_file):
     try:
         with open(report_file, 'w') as file:
             json.dump({"exit_code": error_code, "error_message": error_message}, file, indent=4)
+        #Print to the console the JSON sctructured error message
+        print(json.dumps({"exit_code": error_code, "error_message": error_message}, indent=4))
     except Exception as e:
         print(f"Error writing to output file: {e}")
         sys.exit(error_code)
