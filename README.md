@@ -30,6 +30,7 @@ To get started with this project, you have two options: running it manually usin
 ### Option 1: Using `sandbox.py` Script
 
 The `sandbox.py` script automates the Docker container build and run process. It allows you to pass various flags to Gitleaks for more control over its execution.
+For enhanced verbosity, you can use the `-v` or `--verbose` flag.
 
 1. **Ensure you have Docker installed**. If you don't have it installed, please follow the instructions at https://docs.docker.com/get-docker/.
 
@@ -88,3 +89,27 @@ This structure includes:
 ### Example Report
 
 An example of the report is provided in `example_report.json`. This file contains a list of findings, including file paths, line numbers, and descriptions of the detected sensitive data.
+
+## Tests
+
+### 1. Install Dependencies
+
+Use `pip` to install the required dependencies for the project, including `pytest` for testing:
+
+```bash
+cd tests
+
+pip install -r requirements.txt
+```
+
+This will install all the dependencies, including `pytest`.
+
+### 2. Running the Tests
+
+You can now run the tests using `pytest`. Specifically, to run the tests in `test_transform_results.py`, use the following command:
+
+```bash
+pytest tests/test_transform_results.py
+```
+
+If there's an error or failure, the output will show details of which tests failed and why.
